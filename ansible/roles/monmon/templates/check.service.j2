@@ -1,0 +1,7 @@
+[Unit]
+Description=Service for check.py
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /var/www/html/check.py
+WorkingDirectory=/var/www/html

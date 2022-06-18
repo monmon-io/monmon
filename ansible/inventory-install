@@ -1,0 +1,15 @@
+[servers]
+monmon          ansible_host=:::::RASPBERRY_PI_IP_ADDRESS:::::           hostname=monmon
+
+[sites]
+monmon          ansible_host=:::::RASPBERRY_PI_IP_ADDRESS:::::           hostname=monmon
+
+[servers:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_user=pi
+ansible_ssh_pass=raspberry
+
+[sites:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_user=pi
+ansible_ssh_pass=raspberry

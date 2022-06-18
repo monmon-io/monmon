@@ -1,0 +1,8 @@
+- name: reboot
+  reboot:
+    reboot_timeout: 300
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

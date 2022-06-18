@@ -1,0 +1,74 @@
+- name: 'Add the Debian Buster backports signing keys by id from keyserver.ubuntu.com'
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: '{{ item }}'
+  with_items:
+    - '04EE7237B7D453EC'
+    - '648ACFD622F3D138'
+
+- name: 'Check if /etc/apt/sources.list.d/buster-backports.list exists'
+  stat:
+    path: /etc/apt/sources.list.d/buster-backports.list
+  register: backports_file
+
+- name: "Create /etc/apt/sources.list.d/buster-backports.list"
+  file:
+    path: /etc/apt/sources.list.d/buster-backports.list
+    state: touch
+    mode: '644'
+    owner: 'root'
+    group: 'root'
+  when: backports_file.stat.exists == false
+
+- name: 'Make sure the Buster backports repo is in /etc/apt/sources.list.d/buster-backports.list'
+  lineinfile:
+    path: '/etc/apt/sources.list.d/buster-backports.list'
+    line: 'deb http://deb.debian.org/debian buster-backports main'
+
+- name: 'Update repos'
+  apt:
+    update_cache: yes
+    force_apt_get: true
+    cache_valid_time: 3600
+
+- name: 'Upgrade packages'
+  apt:
+    upgrade: dist
+    force_apt_get: yes
+
+- name: 'Install Monit from Buster backports'
+  apt:
+    name:
+    - monit
+    state: present
+#    default_release: buster-backports
+
+- name: 'Check to see if the custom monit config file exists'
+  stat:
+    path: 'monit.custom.j2'
+    follow: yes
+  delegate_to: localhost
+  register: custom_monit_config_file
+
+- name: 'Copy custom monit config file to /etc/monit/monitrc'
+  template:
+    src: 'monit.custom.j2'
+    dest: '/etc/monit/monitrc'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  when: custom_monit_config_file.stat.exists
+
+- name: "Copy default monit.j2 file to /etc/monit"
+  template:
+    src: 'monit.j2'
+    dest: '/etc/monit/monitrc'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  when: not custom_monit_config_file.stat.exists
+
+- name: 'Enable Monit'
+  service:
+    name: monit
+    enabled: yes

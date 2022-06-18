@@ -1,0 +1,3 @@
+- name: 'Rebooting the Raspberry Pi'
+  reboot:
+    reboot_timeout: 300

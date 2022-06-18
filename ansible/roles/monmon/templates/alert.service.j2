@@ -1,0 +1,7 @@
+[Unit]
+Description=Service for alert.py
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /var/www/html/alert.py
+WorkingDirectory=/var/www/html

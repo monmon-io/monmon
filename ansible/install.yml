@@ -1,0 +1,20 @@
+- hosts: servers
+  remote_user: 'pi'
+  become: true
+  become_method: sudo
+  roles:
+    - role: monmon
+
+- hosts: sites
+  remote_user: 'pi'
+  become: true
+  become_method: sudo
+  roles:
+    - role: monit
+
+- hosts: servers
+  remote_user: 'pi'
+  become: true
+  become_method: sudo
+  roles:
+    - role: cleanup
