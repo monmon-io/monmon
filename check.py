@@ -173,8 +173,13 @@ def process_api_mnt(monitor_type, label, url, username, password):
             alert_report.append(alert_text(monitor_type, label, url))
             return
 
-        # If a service is having issues, alert
-        if services.count('"status": "2"') > 0:
+        # Determine the total number of statuses returned, as well as how many of them
+        # were successful
+        status_count_total = services.count('"status": "')
+        status_count_success = services.count('"status": "0"')
+
+        # Compare the above status counts and if they aren't equal, alert
+        if status_count_total != status_count_success:
             alert_report.append(alert_text(monitor_type, label, url))
             return
 
