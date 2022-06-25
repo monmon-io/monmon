@@ -90,11 +90,14 @@ def get_args():
 
     if os.path.isfile(args.nodes):
         with open(args.nodes) as node_rows:
-            node_array = node_rows.readlines()
+            node_list = node_rows.readlines()
+
+    # Remove blank lines
+    clean_node_list = [n for n in node_list if n != "\n"]
 
     list_of_pieces = []
     args.nodes = []
-    for node_row in node_array:
+    for node_row in clean_node_list:
         if not node_row[0].startswith("#"):
             list_of_pieces.append(node_row.rstrip().split(":::::"))
 
