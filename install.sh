@@ -65,14 +65,6 @@ if [[ -f config ]]
 then
   cp config ansible/config.custom.j2
 fi
-if [[ -f nodes ]]
-then
-  cp nodes ansible/nodes.custom.j2
-fi
-if [[ -f monit ]]
-then
-  cp monit ansible/monit.custom.j2
-fi
 if [[ -f include.alert_off ]]
 then
   cp include.alert_off ansible/include.alert_off.custom.j2
@@ -80,6 +72,14 @@ fi
 if [[ -f include.alert_on ]]
 then
   cp include.alert_on ansible/include.alert_on.custom.j2
+fi
+if [[ -f monit ]]
+then
+  cp monit ansible/monit.custom.j2
+fi
+if [[ -f nodes ]]
+then
+  cp nodes ansible/nodes.custom.j2
 fi
 echo ""
 echo "# Run Ansible playbook to deploy monmon to Raspberry Pi"
