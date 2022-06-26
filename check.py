@@ -15,6 +15,7 @@ from requests.auth import HTTPBasicAuth
 # Global variables
 alert_report = []
 alerts_filename = "alerts"
+include_filename = "include"
 
 # UptimeRobot URLs
 UPR_DASHBOARD_URL = "https://uptimerobot.com/dashboard#mainDashboard"
@@ -28,6 +29,7 @@ def main():
     """Run the main program"""
     global alert_report
     global alerts_filename
+    global include_filename
 
     args = get_args()
     alert_report = []
@@ -66,6 +68,7 @@ def main():
     else:
 
         write_alerts()
+        run_includes()
 
 
 # =============================================================================
@@ -256,6 +259,14 @@ def delete_alerts():
 
         print("ERROR :: Unable to delete the alerts file")
         exit()
+
+    return
+
+
+def run_includes():
+
+    if os.path.isfile(include_filename):
+        os.system("/usr/bin/python " + include_filename)
 
     return
 
