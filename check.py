@@ -15,7 +15,8 @@ from requests.auth import HTTPBasicAuth
 # Global variables
 alert_report = []
 alerts_filename = "alerts"
-include_filename = "include"
+alert_off_include_filename = "include.alert_off"
+alert_on_include_filename = "include.alert_on"
 
 # UptimeRobot URLs
 UPR_DASHBOARD_URL = "https://uptimerobot.com/dashboard#mainDashboard"
@@ -29,7 +30,8 @@ def main():
     """Run the main program"""
     global alert_report
     global alerts_filename
-    global include_filename
+    global alert_off_include_filename
+    global alert_on_include_filename
 
     args = get_args()
     alert_report = []
@@ -64,11 +66,12 @@ def main():
     if not alert_report:
 
         delete_alerts()
+        alert_off_includes()
 
     else:
 
         write_alerts()
-        run_includes()
+        alert_on_includes()
 
 
 # =============================================================================
@@ -263,10 +266,18 @@ def delete_alerts():
     return
 
 
-def run_includes():
+def alert_off_includes():
 
-    if os.path.isfile(include_filename):
-        os.system("/usr/bin/python " + include_filename)
+    if os.path.isfile(alert_off_include_filename):
+        os.system("/usr/bin/python " + alert_off_include_filename)
+
+    return
+
+
+def alert_on_includes():
+
+    if os.path.isfile(alert_on_include_filename):
+        os.system("/usr/bin/python " + alert_on_include_filename)
 
     return
 

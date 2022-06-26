@@ -2,6 +2,7 @@ __pycache__
 *.pyc
 /alerts
 /config
-/include
+/include.alert_off
+/include.alert_on
 /monit
 /nodes
