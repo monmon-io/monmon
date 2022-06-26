@@ -212,6 +212,22 @@
     mode: '0644'
   when: not custom_nodes_file.stat.exists
 
+- name: 'Check to see if the custom include file exists'
+  stat:
+    path: 'include.custom.j2'
+    follow: yes
+  delegate_to: localhost
+  register: custom_include_file
+
+- name: 'Copy custom include file to /var/www/html'
+  template:
+    src: 'include.custom.j2'
+    dest: '/var/www/html/include'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: custom_include_file.stat.exists
+
 - name: 'Install the BCM 2835 and WiringPi GPIO libraries'
   shell:
     cmd: '/var/www/html/library-install.sh'
