@@ -1,6 +1,7 @@
 __pycache__
 *.pyc
-alerts
+/alerts
 /config
+/include
 /monit
 /nodes
