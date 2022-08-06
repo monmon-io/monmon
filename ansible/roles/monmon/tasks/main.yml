@@ -149,7 +149,7 @@
 
 - name: "Checkout the monmon git repo"
   git:
-    repo: 'https://gitlab.com/monmon_io/monmon.git'
+    repo: 'https://github.com/monmon-io/monmon.git'
     dest: '/var/www/html'
     umask: '022'
     force: yes
@@ -187,31 +187,6 @@
     mode: '0644'
   when: not custom_config_file.stat.exists
 
-- name: 'Check to see if the custom nodes file exists'
-  stat:
-    path: 'nodes.custom.j2'
-    follow: yes
-  delegate_to: localhost
-  register: custom_nodes_file
-
-- name: 'Copy custom nodes file to /var/www/html'
-  template:
-    src: 'nodes.custom.j2'
-    dest: '/var/www/html/nodes.custom'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  when: custom_nodes_file.stat.exists
-
-- name: "Copy default nodes.j2 config file to /var/www/html"
-  template:
-    src: 'nodes.j2'
-    dest: '/var/www/html/nodes'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  when: not custom_nodes_file.stat.exists
-
 - name: 'Check to see if the custom alert_off include file exists'
   stat:
     path: 'include.alert_off.custom.j2'
@@ -243,6 +218,31 @@
     group: 'root'
     mode: '0644'
   when: custom_include_alert_on_file.stat.exists
+
+- name: 'Check to see if the custom nodes file exists'
+  stat:
+    path: 'nodes.custom.j2'
+    follow: yes
+  delegate_to: localhost
+  register: custom_nodes_file
+
+- name: 'Copy custom nodes file to /var/www/html'
+  template:
+    src: 'nodes.custom.j2'
+    dest: '/var/www/html/nodes.custom'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: custom_nodes_file.stat.exists
+
+- name: "Copy default nodes.j2 config file to /var/www/html"
+  template:
+    src: 'nodes.j2'
+    dest: '/var/www/html/nodes'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: not custom_nodes_file.stat.exists
 
 - name: 'Install the BCM 2835 and WiringPi GPIO libraries'
   shell:
