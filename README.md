@@ -1,6 +1,23 @@
 # monmon - Monitor your monitoring with a Raspberry Pi
 
-[[_TOC_]]
+- [What is monmon and what does it do?](#what-is-monmon-and-what-does-it-do-)
+- [Why did you create monmon?](#why-did-you-create-monmon-)
+- [See monmon in action](#see-monmon-in-action)
+- [Supported Providers](#supported-providers)
+- [Requirements](#requirements)
+- [Tools](#tools)
+- [Installation Types](#installation-types)
+- [Installation](#installation)
+- [Configuration Files](#configuration-files)
+  * [Node File](#node-file)
+  * [monmon Configuration File](#monmon-configuration-file)
+  * [Monit Configuration File](#monit-configuration-file)
+- [Node File Formats & Examples](#node-file-formats---examples)
+  * [Healthchecks.io](#healthchecksio)
+  * [Monit](#monit)
+  * [UptimeRobot](#uptimerobot)
+- [Sample Node File](#sample-node-file)
+- [License](#license)
 
 # What is monmon and what does it do?
 
