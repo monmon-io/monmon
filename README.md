@@ -187,7 +187,7 @@ upr:::::Main UptimeRobot Account:::::dj3fsjh8df-kdk993ijkosf8838kskdldkdk38
 
 # License
 monmon -- Monitor your monitoring with a Raspberry Pi  
-Copyright (c) 2022 Greg Chetcuti <greg@chetcuti.com>
+Copyright (c) 2024 Greg Chetcuti <greg@chetcuti.com>
 
 monmon is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
