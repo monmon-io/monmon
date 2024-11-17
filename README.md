@@ -15,7 +15,7 @@
 - [Node File Formats & Examples](#node-file-formats--examples)
   * [Healthchecks.io](#healthchecksio)
   * [Monit](#monit)
-  * [Uptime Kuma](#uptimekuma)
+  * [Uptime Kuma](#uptime-kuma)
   * [UptimeRobot](#uptimerobot)
 - [Sample Node File](#sample-node-file)
 - [License](#license)
