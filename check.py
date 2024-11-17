@@ -52,6 +52,13 @@ def main():
             # monit ui username node[3]  monit ui password node[4]
             process_api_mnt(node[0], node[1], node[2], node[3], node[4])
 
+        # If it's an Uptime Kuma node (upk)
+        elif node[0] == "upk":
+
+            # type node[0]  label node[1]  uptime kuma url node[2]
+            # uptime kuma ui username node[3]  uptime kuma ui password node[4]
+            process_api_upk(node[0], node[1], node[2], node[3], node[4])
+
         # If it's an UptimeRobot node (upr)
         elif node[0] == "upr":
 
@@ -191,6 +198,25 @@ def process_api_mnt(monitor_type, label, url, username, password):
         if status_count_total != status_count_success:
             alert_report.append(alert_text(monitor_type, label, url))
             return
+
+    except:
+
+        alert_report.append(alert_text(monitor_type, label, url))
+        return
+
+    return
+
+
+def process_api_upk(monitor_type, label, url, username, password):
+
+    try:
+
+        result = requests.get(url + "/metrics", auth=(username, password))
+
+        for line in result.text.split("\n"):
+            if line.startswith("monitor_status") and line.endswith("0"):
+                alert_report.append(alert_text(monitor_type, label, url))
+                return
 
     except:
 

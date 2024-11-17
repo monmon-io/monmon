@@ -15,6 +15,7 @@
 - [Node File Formats & Examples](#node-file-formats--examples)
   * [Healthchecks.io](#healthchecksio)
   * [Monit](#monit)
+  * [Uptime Kuma](#uptimekuma)
   * [UptimeRobot](#uptimerobot)
 - [Sample Node File](#sample-node-file)
 - [License](#license)
@@ -45,7 +46,7 @@ simply alert me of any issues with my Monit instances, and then I could click th
 the monmon status page to the Monit Web UI and see what the actual issue is. Not long
 after, monmon was born.
 
-Since then I've added support for both Healthchecks.io and UptimeRobot, and I'll be
+Since then I've added support for both Healthchecks.io, Uptime Kuma, and UptimeRobot, and I'll be
 adding other monitoring systems as time goes on.
 
 # See monmon in action
@@ -57,6 +58,7 @@ _Ignore the video quality, it's absolutely awful!_
 # Supported Providers
 - [Healthchecks.io][] (hch)
 - [Monit][] (mnt)
+- [Uptime Kuma][] (upk)
 - [UptimeRobot][] (upr)
 
 # Requirements
@@ -174,7 +176,11 @@ need to be generated for each project group that you want to monitor.
 
 ## Monit  
 Format: ***TYPE:::::LABEL:::::BASE MONIT URL:::::MONIT UI USERNAME:::::MONIT UI PASSWORD***  
-Example: mnt:::::monit.example.com:::::http://monit.example.com:2812:::::username:::::password
+Example: mnt:::::monit.example.com:::::https://monit.example.com:2812:::::username:::::password
+
+## Uptime Kuma  
+Format: ***TYPE:::::LABEL:::::BASE UK URL:::::UK UI USERNAME:::::UK UI PASSWORD***  
+Example: upk:::::Uptime Kuma Self-Hosted:::::https://uptimekuma.example.com:::::username:::::password
 
 ## UptimeRobot  
 Format: ***TYPE:::::LABEL:::::API KEY***  
@@ -182,7 +188,8 @@ Example: upr:::::Main UptimeRobot Account:::::dj3fsjh8df-kdk993ijkosf8838kskdldk
 
 # Sample Node File
 hch:::::Backups, Local (to Gitea):::::https://healthchecks.example.com:::::kd993jflsl33nfid88jfo32lksdjslf3  
-mnt:::::monit.example.com:::::http://monit.example.com:2812:::::username:::::password  
+mnt:::::monit.example.com:::::https://monit.example.com:2812:::::username:::::password  
+upk:::::Uptime Kuma Self-Hosted:::::https://uptimekuma.example.com:::::username:::::password  
 upr:::::Main UptimeRobot Account:::::dj3fsjh8df-kdk993ijkosf8838kskdldkdk38
 
 # License
@@ -202,5 +209,6 @@ You should have received a copy of the GNU General Public License along with mon
 [Monit]: https://mmonit.com/monit/
 [Raspberry Pi OS Lite 32-bit ISO image]: https://www.raspberrypi.com/software/
 [Raspberry Pi]: https://www.raspberrypi.org
+[Uptime Kuma]: https://uptime.kuma.pet
 [UptimeRobot]: https://uptimerobot.com
 [Waveshare 1.3" LCD Hat]: https://www.waveshare.com/wiki/1.3inch_LCD_HAT
